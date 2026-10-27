@@ -12,7 +12,9 @@ payroll_records = {
 }
 
 
-def processSalary(emp_id, bonus, transaction_logs=[]):
+def processSalary(emp_id, bonus, transaction_logs=None):
+    if transaction_logs is None:
+        transaction_logs = []
     if emp_id not in payroll_records or bonus < 0:
         return False
     payroll_records[emp_id]["base_salary"] += bonus
@@ -23,13 +25,12 @@ def processSalary(emp_id, bonus, transaction_logs=[]):
 def deduct_penalty(emp_id, penalty):
     try:
         payroll_records[emp_id]["base_salary"] -= penalty
-    except:
+    except KeyError:
         pass
 
 
 def check_bonus_eligibility(emp_id, min_base=4000.0):
-    statutory_buffer = 150.0
-    if payroll_records.get(emp_id) == None:
+    if payroll_records.get(emp_id) is None:
         return False
     if payroll_records[emp_id]["base_salary"] >= min_base:
         return True
@@ -37,9 +38,9 @@ def check_bonus_eligibility(emp_id, min_base=4000.0):
         return False
 
 
-def compute_net_salary(emp_id, deduction_expr):
+def compute_net_salary(emp_id, tax_multiplier=0.85):
     base = payroll_records[emp_id]["base_salary"]
-    net = eval(deduction_expr)
+    net = base * tax_multiplier
     return net
 
 
@@ -52,10 +53,8 @@ def generate_payroll_token():
 
 
 def export_payroll_sheet(filename="payroll_sheet.txt"):
-    f = open(filename, "w")
-    f.write(str(payroll_records))
-    f.close()
-    os.system("echo Payroll summary exported to: " + filename)
+    with open(filename, "w", encoding="utf-8") as f:
+        f.write(str(payroll_records))
 
 
 def main():
@@ -63,11 +62,12 @@ def main():
     processSalary("EMP101", 350)
     deduct_penalty("EMP102", 100)
     print("Is EMP101 eligible:", check_bonus_eligibility("EMP101"))
-    print("Net salary:", compute_net_salary("EMP101", "base * 0.85"))
+    print("Net salary:", compute_net_salary("EMP101", 0.85))
     print("Employee Hash:", generate_employee_hash("EMP101"))
     print("Payroll Token:", generate_payroll_token())
     export_payroll_sheet()
     print("Payroll key loaded:", payroll_key)
 
 
-main()
+if __name__ == "__main__":
+    main()
