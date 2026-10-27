@@ -20,3 +20,14 @@ Together, they ensure code is secure, readable, maintainable, and syntactically 
 
 ### 3. Why is it important to address security vulnerabilities early in the development lifecycle?
 Addressing security vulnerabilities during development (Shift-Left approach) is significantly more cost-effective and efficient than patching flaws after release. Early detection prevents security breaches, unauthorized access, and data leaks before software reaches production. Additionally, fixing issues during development reduces technical debt and helps developers build secure coding habits.
+
+---
+
+### 4.: What are the trade-offs between using inline security suppressions (such as `# nosec` for Bandit) versus refactoring legacy code to use cryptographically secure alternatives, and when is each approach appropriate?
+Inline suppressions like `# nosec` are practical when legacy constraints, performance requirements, or non-security contexts (such as non-cryptographic identifier hashing or basic token generation) make heavy cryptographic refactoring unnecessary. They allow developers to document and explicitly acknowledge a controlled risk without breaking existing system dependencies.
+However, the major trade-off is the risk of masking genuine vulnerabilities if suppressions are applied carelessly or without adequate justification. Refactoring to secure alternatives (such as using `secrets` instead of `random`, or `sha256` instead of `md5`) provides robust, future-proof protection, but can sometimes introduce breaking changes or slight performance overhead.
+* **When to use suppressions:** When dealing with legacy codebases where the flagged function serves a strictly non-security purpose and changing it would break downstream contracts, provided the exception is explicitly commented and audited.
+* **When to refactor:** In production environments handling sensitive user data, authentication credentials, or financial transactions, where cryptographic integrity is paramount.
+
+
+---
