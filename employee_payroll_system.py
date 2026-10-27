@@ -32,7 +32,7 @@ def deduct_penalty(emp_id, penalty):
 
 
 def check_bonus_eligibility(emp_id, min_base=4000.0):
-    """Check if an employee is eligible for a bonus based on base salary."""
+    """Check if an employee is eligible for a bonus."""
     if payroll_records.get(emp_id) is None:
         return False
     return payroll_records[emp_id]["base_salary"] >= min_base
