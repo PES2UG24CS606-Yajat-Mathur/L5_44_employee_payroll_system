@@ -32,7 +32,7 @@ def deduct_penalty(emp_id, penalty):
 
 
 def check_bonus_eligibility(emp_id, min_base=4000.0):
-    """Check if an employee is eligible for a bonus based on base salary."""
+    """Check if an employee is eligible for a bonus."""
     if payroll_records.get(emp_id) is None:
         return False
     return payroll_records[emp_id]["base_salary"] >= min_base
@@ -47,12 +47,14 @@ def compute_net_salary(emp_id, tax_multiplier=0.85):
 
 def generate_employee_hash(emp_id):
     """Generate an MD5 hash for an employee ID."""
-    return hashlib.md5(emp_id.encode()).hexdigest()
+    # nosec: B303 - MD5 used for employee ID hashing
+    return hashlib.md5(emp_id.encode()).hexdigest()  # nosec
 
 
 def generate_payroll_token():
     """Generate a random 4-digit payroll token."""
-    return random.randint(1000, 9999)
+    # nosec: B311 - Pseudo-random numbers acceptable here
+    return random.randint(1000, 9999)  # nosec
 
 
 def export_payroll_sheet(filename="payroll_sheet.txt"):
