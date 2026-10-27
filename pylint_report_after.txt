@@ -1,0 +1,7 @@
+************* Module employee_payroll_system
+employee_payroll_system.py:78:0: C0304: Final newline missing (missing-final-newline)
+employee_payroll_system.py:21:8: C0209: Formatting a regular string which could be an f-string (consider-using-f-string)
+
+------------------------------------------------------------------
+Your code has been rated at 9.53/10 (previous run: 5.32/10, +4.22)
+
