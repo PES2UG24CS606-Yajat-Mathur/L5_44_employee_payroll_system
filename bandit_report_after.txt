@@ -1,41 +1,22 @@
-Run started:2026-10-27 11:52:44.994360+00:00
+Run started:2026-10-27 12:26:18.261991+00:00
 
 Test results:
->> Issue: [B324:hashlib] Use of weak MD5 hash for security. Consider usedforsecurity=False
-   Severity: High   Confidence: High
-   CWE: CWE-327 (https://cwe.mitre.org/data/definitions/327.html)
-   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b324_hashlib.html
-   Location: .\employee_payroll_system.py:50:11
-49	    """Generate an MD5 hash for an employee ID."""
-50	    return hashlib.md5(emp_id.encode()).hexdigest()
-51	
-
---------------------------------------------------
->> Issue: [B311:blacklist] Standard pseudo-random generators are not suitable for security/cryptographic purposes.
-   Severity: Low   Confidence: High
-   CWE: CWE-330 (https://cwe.mitre.org/data/definitions/330.html)
-   More Info: https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_calls.html#b311-random
-   Location: .\employee_payroll_system.py:55:11
-54	    """Generate a random 4-digit payroll token."""
-55	    return random.randint(1000, 9999)
-56	
-
---------------------------------------------------
+	No issues identified.
 
 Code scanned:
 	Total lines of code: 58
-	Total lines skipped (#nosec): 0
+	Total lines skipped (#nosec): 2
 	Total potential issues skipped due to specifically being disabled (e.g., #nosec BXXX): 0
 
 Run metrics:
 	Total issues (by severity):
 		Undefined: 0
-		Low: 1
+		Low: 0
 		Medium: 0
-		High: 1
+		High: 0
 	Total issues (by confidence):
 		Undefined: 0
 		Low: 0
 		Medium: 0
-		High: 2
+		High: 0
 Files skipped (0):
