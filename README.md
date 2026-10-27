@@ -1,5 +1,7 @@
 # Lab 5: Static Code Analysis — Employee Payroll System
 
+# It has 6 commits for that employee_payroll_system.py I made 3 commits form my persnal github account and then later made from my college github account. It is basically the same 3 commits only done twice by different accounts of mine. Pls consider. :)
+
 **Your file:** `employee_payroll_system.py`
 
 Follow the lab handout for the full instructions.
